@@ -9,6 +9,8 @@ const userSchema = new Schema({
     email:{
         required:[true, 'Please provide your email'],
         type:Schema.Types.String,
+        unique: true,
+        trim: true,  //removes any extra spaces before or after the string.
     },
     password:{
         required:[true, 'Please provide your password'],
