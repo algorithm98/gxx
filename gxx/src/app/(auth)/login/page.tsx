@@ -3,10 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 
 
 export default function Login() {
+
+    const params = useSearchParams()
 
 
     const [authState, setAutState] = useState({
@@ -122,6 +125,11 @@ export default function Login() {
                 Create a free account
               </Link>
             </p>
+
+            {params.get("message") ? (<p className="bg-green-400 font-bold rounded-md p-4">
+                { params.get("message") }
+            </p> ) : ( <></> )}
+
             <form action="#" method="POST" className="mt-8">
               <div className="space-y-5">
                 <div>

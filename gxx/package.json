@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vinejs/vine": "^1.8.0",
+    "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
     "mongodb": "^6.5.0",
     "mongoose": "^8.2.3",
