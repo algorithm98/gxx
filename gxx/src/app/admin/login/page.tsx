@@ -1,19 +1,34 @@
 "use client"
 import React, { useState } from 'react'
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import Toast from '@/components/Toast';
 
 export default function AdminLogin() {
+
+    const router = useRouter()
 
     const [authState, setAuthState] = useState({
         email:"",
         password:""
     })
-    const handleSubmit = (event:React.FormEvent) => {
+    const handleSubmit = async (event:React.FormEvent) => {
         event.preventDefault();
-        console.log("The Auth State is", authState);
+        const data = await signIn ("credentials" ,{
+            email:authState.email,
+            password:authState.password,
+            redirect:false
+        })
+
+        if (data?.status == 200){
+            router.replace("/admin/dashboard");
+        }
+
     };
 
   return (
     <div className='h-screen w-screen flex justify-center items-center'>
+        <Toast />
       <div className='w-[500px] shadow-md rounded-lg p-5'>
         <h1 className="text-2xl font-bold">Admin Login</h1>
         <p>Welcome back</p>
