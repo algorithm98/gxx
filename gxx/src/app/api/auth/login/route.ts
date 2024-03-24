@@ -53,17 +53,6 @@ export async function POST(request:NextRequest) {
           );
         }
 
-        // return NextResponse.json({
-        //     status:400,
-        //     errors:{
-        //         email:"No account is registered  with this email"
-        //     },
-        // } , 
-        // {status:200}
-        // );
-
-
-
     } catch (error) {
         if (error instanceof errors.E_VALIDATION_ERROR) {
             return NextResponse.json(
