@@ -1,5 +1,5 @@
-// import {connect} from '@/database/mongo.config';
-import dbConnect from '@/database/mongo.config';
+import {connect} from '@/database/mongo.config';
+// import dbConnect from '@/database/mongo.config';
 import { NextRequest, NextResponse } from 'next/server';
 import { registerSchema } from '@/validator/authSchema';
 import vine, { errors } from '@vinejs/vine';
@@ -10,7 +10,9 @@ import bcrypt from 'bcryptjs';
 import { User } from '@/model/User';
 
 // * For DB Connection
-dbConnect();
+// dbConnect();
+
+connect();
 
 export async function POST(request:NextRequest) {
 
@@ -28,7 +30,7 @@ export async function POST(request:NextRequest) {
         return NextResponse.json({
             status:400,
             errors:{
-                email:"Email is already in use."
+                email:"Email is already in use, Please use another email."
             }
         }, {status:200}
         );
@@ -37,7 +39,6 @@ export async function POST(request:NextRequest) {
          // Incrypt the password.
         const salt = bcrypt.genSaltSync(10);
         output.password = bcrypt.hashSync(output.password, salt);
-        // return NextResponse.json(output, { status: 200 });
         await User.create(output)
         return NextResponse.json({status:200, message:"User Created Sucessfully"}, 
         {status:200});
