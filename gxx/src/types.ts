@@ -3,3 +3,9 @@ type registerErrorType = {
     password?: string;
     name?  : string;
 }
+
+
+type loginErrorType = {
+    email? : string;
+    password?: string;
+}

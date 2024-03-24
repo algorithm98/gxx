@@ -16,6 +16,15 @@ const userSchema = new Schema({
         required:[true, 'Please provide your password'],
         type: Schema.Types.String
     },
+    avatar:{
+        required: false,
+        type: Schema.Types.String,
+    },
+    role:{
+        required:true,
+        type: Schema.Types.String,
+        default: "User",
+    }
 });
 
 export const User = mongoose.models.User || mongoose.model("User",userSchema);

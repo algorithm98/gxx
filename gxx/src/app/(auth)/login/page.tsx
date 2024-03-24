@@ -4,6 +4,10 @@ import React from 'react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import axios from 'axios';
+
+import {signIn} from "next-auth/react"
+
 
 
 
@@ -17,8 +21,31 @@ export default function Login() {
         password:"",
     });
 
+    const [loading, setLoading] = useState<boolean>(false)
+    const [errors, setErrors] = useState<loginErrorType>({});
+
+
     const submitForm = () => {
         console.log("The Auth State Is", authState)
+        axios
+        .post("/api/auth/login", authState)
+        .then((res) => {
+          setLoading(false);
+          const response = res.data;
+          console.log("The response is", res.data);
+          if (response.status == 200) {
+            signIn("credentials", { 
+                email : authState.email,
+                password: authState.password,
+                callbackUrl : "/",
+                redirect: true,
+             })
+          } else if (response?.status == 400) {
+            setErrors(response?.errors);
+          }
+
+        })
+        .catch((err) => console.log("The error is", err));
     };
 
 
@@ -116,25 +143,29 @@ export default function Login() {
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
             <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">Sign in</h2>
             <p className="mt-2 text-sm text-gray-600">
-              Don&apos;t have an account?{' '}
+              Don't have an account?
               <Link
                 href="/register"
                 title=""
                 className="font-semibold text-black transition-all duration-200 hover:underline"
               >
-                Create a free account
+                Sign Up
               </Link>
             </p>
-
-            {params.get("message") ? (<p className="bg-green-400 font-bold rounded-md p-4">
+            {params.get("message") ? (
+            <p className="bg-green-400 font-bold rounded-md p-4">
                 { params.get("message") }
-            </p> ) : ( <></> )}
-
+            </p> 
+            ) : (
+            <></> 
+            )}
             <form action="#" method="POST" className="mt-8">
               <div className="space-y-5">
                 <div>
-                  <label htmlFor="" className="text-base font-medium text-gray-900">
-                    
+                  <label
+                    htmlFor=""
+                    className="text-base font-medium text-gray-900"
+                  >
                     Email address
                   </label>
                   <div className="mt-2">
@@ -142,14 +173,21 @@ export default function Login() {
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="email"
                       placeholder="Email"
-                      onChange={(e) => setAutState({...authState, email:e.target.value})}
+                      onChange={(e) =>
+                        setAutState({ ...authState, email: e.target.value })
+                      }
                     ></input>
+                    <span className="text-red-500 font-bold">
+                      {errors?.email}
+                    </span>
                   </div>
                 </div>
                 <div>
                   <div className="flex items-center justify-between">
-                    <label htmlFor="" className="text-base font-medium text-gray-900">
-                    
+                    <label
+                      htmlFor=""
+                      className="text-base font-medium text-gray-900"
+                    >
                       Password
                     </label>
                   </div>
@@ -158,21 +196,39 @@ export default function Login() {
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="password"
                       placeholder="Password"
-                      onChange={(e) => setAutState({...authState, password:e.target.value})}
+                      onChange={(e) =>
+                        setAutState({ ...authState, password: e.target.value })
+                      }
                     ></input>
+                    <span className="text-red-500 font-bold">
+                      {errors?.password}
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <Link href="/forgot-password">Forgot password ?</Link>
                   </div>
                 </div>
                 <div>
                   <button
                     type="button"
-                    className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                    className={`inline-flex w-full items-center justify-center rounded-md  px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80  ${
+                      loading ? "bg-gray-600" : "bg-black"
+                    }`}
                     onClick={submitForm}
                   >
-                    Login Now
+                    {loading ? "Processing.." : "Login"}
                   </button>
                 </div>
               </div>
             </form>
+
+
+
+
+
+
+
+
             <div className="mt-3 space-y-3">
             </div>
           </div>

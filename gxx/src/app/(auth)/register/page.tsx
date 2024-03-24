@@ -13,6 +13,8 @@ export default function Register() {
     const router = useRouter();
 
     const [loading, setLoading] = useState<boolean>(false)
+    const [errors, setError] = useState<registerErrorType>({});
+
     const [authState, setAutState] = useState({
         name:"",
         email:"",
@@ -21,9 +23,6 @@ export default function Register() {
         
     });
 
-
-
-    const [errors, setError] = useState<registerErrorType>({});
 
     const submitForm = async () => {
       setLoading(true);
