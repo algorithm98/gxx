@@ -21,10 +21,16 @@ const userSchema = new Schema({
         type: Schema.Types.String,
     },
     role:{
-        required:true,
+        required:false,
         type: Schema.Types.String,
         default: "User",
+    },
+    Credentials:{
+        required:false,
+        type: Schema.Types.String,
+        default: "Credentials*****",
     }
+
 });
 
 export const User = mongoose.models.User || mongoose.model("User",userSchema);
