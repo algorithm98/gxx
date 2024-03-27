@@ -18,10 +18,8 @@ export default function Register() {
     const [authState, setAutState] = useState({
         name:"",
         email:"",
-        mobile: "",
         password:"",
         password_confirmation:"",
-        
     });
 
 
@@ -35,12 +33,12 @@ export default function Register() {
           console.log("The response is", res.data);
           const response = res.data;
           if (response.status == 200) {
-            // router.push("/login?message=Account Created Successfully.! Please Login To Your Account")
             router.push(`/login?message=${response.msg}`);
           } else if (response?.status == 400) {
             setError(response?.errors);
+          } else {
+            setError({});
           }
-
         })
         .catch((err) => console.log("The error is", err));
     };
@@ -199,28 +197,6 @@ export default function Register() {
                   </div>
                 </div>
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="text-base font-medium text-gray-900"
-                  >
-                    Mobile
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type="phone"
-                      placeholder="Mobile"
-                      id="mobile"
-                      onChange={(e) =>
-                        setAutState({ ...authState, mobile: e.target.value })
-                      }
-                    ></input>
-                    <span className="text-red-500 font-bold">
-                      {errors?.mobile}
-                    </span>
-                  </div>
-                </div>
-                <div>
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="password"
@@ -282,11 +258,6 @@ export default function Register() {
                 </div>
               </div>
             </form>
-
-
-
-
-
             <div className="mt-3 space-y-3">
             </div>
           </div>

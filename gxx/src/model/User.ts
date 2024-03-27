@@ -1,4 +1,5 @@
 import mongoose , {Schema, SchemaType} from "mongoose";
+import { flushAllTraces } from "next/dist/trace";
 
 
 const userSchema = new Schema({
@@ -26,7 +27,7 @@ const userSchema = new Schema({
         default: "User",
     },
     mobile:{
-        required: [true, 'Please provide your mobile'],
+        required: [false, 'Please provide your mobile'],
         type: Schema.Types.String,
         trim:true,
     },

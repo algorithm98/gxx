@@ -11,10 +11,10 @@ type loginErrorType = {
     password?: string;
 }
 
-type SideNavItem = {
-    title: string;
-    path: string;
-    icon?: JSX.Element;
-    submenu?: boolean;
-    subMenuItems?: SideNavItem[];
-  };
+// type SideNavItem = {
+//     title: string;
+//     path: string;
+//     icon?: JSX.Element;
+//     submenu?: boolean;
+//     subMenuItems?: SideNavItem[];
+//   };

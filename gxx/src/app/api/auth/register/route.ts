@@ -1,4 +1,11 @@
 
+
+// import { User } from "@/model/User";
+// import { registerSchema } from "@/validator/authSchema";
+
+
+
+
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/database/mongo.config";
 import { User } from "@/model/User";
@@ -39,7 +46,7 @@ export async function POST(request: NextRequest) {
         output.password = bcrypt.hashSync(output.password, salt);
         await User.create(output);
         return NextResponse.json(
-          { status: 200, msg: "User Created Successfully! Please Login To Your Account" },
+          { status: 200, msg: "User Created successfully!" },
           { status: 200 }
         );
       }
