@@ -28,7 +28,7 @@ export const authOptions: AuthOptions = {
   },
 
   callbacks: {
-    async signIn({ user, account, profile, email, mobile, credentials }) {
+    async signIn({ user, account, profile, email, credentials }) {
       connect();
       try {
         const findUser = await UserModel.findOne({ email: user.email });
@@ -38,7 +38,6 @@ export const authOptions: AuthOptions = {
         await UserModel.create({
           email: user.email,
           name: user.name,
-          mobile: user.mobile,
           role: "User",
         });
         return true;
@@ -93,16 +92,5 @@ export const authOptions: AuthOptions = {
       },
     }),
 
-    
-    // GithubProvider({
-    //   clientId: process.env.GITHUB_CLIENT_ID!,
-    //   clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-    // }),
-
-    // GoogleProvider({
-    //   clientId: process.env.GOOGLE_CLIENT_ID!,
-    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    // }),
-    // ...add more providers here
   ],
 };
