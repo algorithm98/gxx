@@ -18,6 +18,7 @@ export default function Register() {
     const [authState, setAutState] = useState({
         name:"",
         email:"",
+        mobile: "",
         password:"",
         password_confirmation:"",
         
@@ -301,6 +302,32 @@ export default function Register() {
                     </span>
                   </div>
                 </div>
+
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="text-base font-medium text-gray-900"
+                  >
+                    Mobile
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      type="email"
+                      placeholder="Email"
+                      id="email"
+                      onChange={(e) =>
+                        setAutState({ ...authState, mobile: e.target.value })
+                      }
+                    ></input>
+                    <span className="text-red-500 font-bold">
+                      {errors?.email}
+                    </span>
+                  </div>
+                </div>
+
+
                 <div>
                   <div className="flex items-center justify-between">
                     <label

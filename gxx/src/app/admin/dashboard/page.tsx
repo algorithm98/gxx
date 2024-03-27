@@ -4,7 +4,6 @@ import React from 'react'
 import { redirect } from 'next/navigation'
 import SignOutButton from '@/components/signOutButton'
 
-
 export default async function AdminDashboard() {
     const session: CustomSession | null = await getServerSession(authOptions);
   

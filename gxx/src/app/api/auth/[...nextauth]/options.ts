@@ -1,65 +1,3 @@
-// import { AuthOptions } from "next-auth";
-// import CredentialsProvider from "next-auth/providers/credentials";
-
-
-// import { connect } from "@/database/mongo.config";
-// import { User } from "@/model/User";
-
-
-
-// export const authOptions:AuthOptions = {
-
-//     pages: {
-//         signIn: "/login",
-
-//     },
-    
-
-    
-//     async session({ session, user, token }) {
-//         return session
-//       },
-//       async jwt({ token, user, account, profile, isNewUser }) {
-//         return token
-//       }
-  
-
-
-//     providers:[
-//         CredentialsProvider({
-//             name:"Next Auth",
-//             credentials:{
-//                 email: {
-//                 label: "Email",
-//                 type: "email",
-//                 placeholder: "Your Email"
-//             },
-//             password:{
-//                 label: "password",
-//                 type: "password",
-//             },
-//             },
-//             async authorize(credentials, req) {
-
-//                 connect();
-//                 const user = await User.findOne({email: credentials?.email});
-                
-//                 if (user) {
-//                     return user
-//                 } else {
-//                     return null
-
-//                 }
-
-//             },
-//         })
-//     ]
-// }
-
-
-
-
-
 
 
 import { connect } from "@/database/mongo.config";
@@ -81,6 +19,7 @@ export type CustomUser = {
   email?: string | null;
   role?: string | null;
   avatar?: string | null;
+  mobile?:  string | null;
 };
 
 export const authOptions: AuthOptions = {
@@ -89,7 +28,7 @@ export const authOptions: AuthOptions = {
   },
 
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account, profile, email, mobile, credentials }) {
       connect();
       try {
         const findUser = await UserModel.findOne({ email: user.email });
@@ -99,6 +38,7 @@ export const authOptions: AuthOptions = {
         await UserModel.create({
           email: user.email,
           name: user.name,
+          mobile: user.mobile,
           role: "User",
         });
         return true;

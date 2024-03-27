@@ -25,6 +25,11 @@ const userSchema = new Schema({
         type: Schema.Types.String,
         default: "User",
     },
+    mobile:{
+        required: [true, 'Please provide your mobile'],
+        type: Schema.Types.String,
+        trim:true,
+    },
     Credentials:{
         required:false,
         type: Schema.Types.String,
