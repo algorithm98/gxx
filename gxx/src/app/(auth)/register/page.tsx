@@ -48,31 +48,6 @@ export default function Register() {
 
 
 
-
-    // // const [loading, setLoading] = useState<boolean>(false)
-    // const [errors, setErrors] = useState<registerErrorType>({});
-
-    // const submitForm = async () => {
-    //   setLoading(true)
-    //     console.log("The Auth State Is", authState);
-
-    //     await axios.post("/api/auth/register", authState)
-    //     .then((res) => {
-    //        setLoading(false)
-    //        const response = res.data;
-    //        if (response.status == 200) {
-    //         console.log("User Signed Up")
-    //        }else if (response?.status == 400){
-    //         setErrors(response?.errors);
-    //        }
-    //     })
-    //     .catch((err) => {
-    //       setLoading(false)
-    //       console.log("Someting went wrong")
-    //     })
-    // };
-
-
   return (
     <section>
       <div className="grid grid-cols-1 lg:grid-cols-2 h-screen">
@@ -176,85 +151,6 @@ export default function Register() {
                 Login Here
               </Link>
             </p>
-            {/* <form action="#" method="POST" className="mt-8">
-              <div className="space-y-5">
-
-              <div>
-                  <label htmlFor="" className="text-base font-medium text-gray-900">
-                    Name
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type="text"
-                      placeholder="Name"
-                      onChange={(e) => setAutState({...authState, name:e.target.value})}
-                    ></input>
-                    <span className="text-red-500 font-bold">{errors?.name}</span>
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="" className="text-base font-medium text-gray-900">
-                    Email address
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type="email"
-                      placeholder="Email"
-                      onChange={(e) => setAutState({...authState, email:e.target.value})}
-                    ></input>
-                    <span className="text-red-500 font-bold">{errors?.email}</span>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center justify-between">
-                    <label htmlFor="" className="text-base font-medium text-gray-900">
-                      Password
-                    </label>
-                  </div>
-                  <div className="mt-2">
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type="password"
-                      placeholder="Password"
-                      onChange={(e) => setAutState({...authState, password:e.target.value})}
-                    ></input>
-                    <span className="text-red-500 font-bold">{errors?.password}</span>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between">
-                    <label htmlFor="" className="text-base font-medium text-gray-900">
-                      Confirm Password
-                    </label>
-                  </div>
-                  <div className="mt-2">
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type="password"
-                      placeholder="Confirm Password"
-                      onChange={(e) => setAutState({...authState, password_confirmation:e.target.value})}
-                    ></input>
-                  </div>
-                </div>
-
-                <div>
-                   <button
-                    type="button"
-                    className={`inline-flex w-full items-center justify-center rounded-md px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80 ${loading ? "bg-grey" : "bg-black"}`}
-                    onClick={submitForm} 
-                    // disabled={loading}
-                  >
-                    {loading ? "Processing..." : "Register"}
-                  </button>
-                </div>
-              </div>
-            </form> */}
-
-
 
             <form action="#" method="POST" className="mt-8">
               <div className="space-y-5">
@@ -302,8 +198,6 @@ export default function Register() {
                     </span>
                   </div>
                 </div>
-
-
                 <div>
                   <label
                     htmlFor="email"
@@ -322,12 +216,10 @@ export default function Register() {
                       }
                     ></input>
                     <span className="text-red-500 font-bold">
-                      {errors?.email}
+                      {errors?.mobile}
                     </span>
                   </div>
                 </div>
-
-
                 <div>
                   <div className="flex items-center justify-between">
                     <label
